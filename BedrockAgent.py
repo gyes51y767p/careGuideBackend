@@ -17,10 +17,8 @@ class BedrockAgent:
         print(os.getenv('AWS_ACCESS_KEY_ID'))
         session = boto3.Session(
                 aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-            aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
-            # aws_access_key_id='AKIA2UC27FERHWRO7V5I',
-            # aws_secret_access_key='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',
-            region_name='us-east-1'
+                aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
+                region_name='us-east-1'
         )
 
         # Initialize Bedrock client

@@ -35,7 +35,8 @@ def upload_text():
     responseAudioData = client.audio.speech.create(
                 model="tts-1",
                 voice="alloy",
-                input=responseStringData
+                input=responseStringData,
+                speed=1.2
                 )
     responseAudioData.stream_to_file(speech_file_path)
 
@@ -75,23 +76,22 @@ def upload_file():
                 model="whisper-1", 
                 file=audio_file
             )
-        responseStringData=agent.invoke(transcription.text)
+        # responseStringData=agent.invoke(transcription.text)
 
-        speech_file_path = Path(app.config['UPLOAD_FOLDER']) / "aiReply.mp3"
+        
+        # speech_file_path = Path(app.config['UPLOAD_FOLDER']) / "aiReply.mp3"
 
-        responseAudioData = client.audio.speech.create(
-                model="tts-1",
-                voice="alloy",
-                input=responseStringData,
-                speed=1.2
-                )
-        responseAudioData.stream_to_file(speech_file_path)
+        # responseAudioData = client.audio.speech.create(
+        #         model="tts-1",
+        #         voice="alloy",
+        #         input=responseStringData,
+        #         speed=1.2
+        #         )
+        # responseAudioData.stream_to_file(speech_file_path)
     
         # Clean up the temporary file
         os.remove(temp_path)
         
-        return jsonify({"filename": file.filename, "transcription": transcription.text,"responseStringData":responseStringData})
+        return jsonify({"transcription": transcription.text})
     else:
         return jsonify({"error": "Invalid file type. Please upload an MP3 file."}), 400
-
-
